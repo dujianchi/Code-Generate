@@ -32,7 +32,7 @@ public class ClassInfoFactory {
                         List<String> tableNames = DataBaseUtil.getAllTableNames();
                         for (String tableName : tableNames) {
                             // 仅加载 *; 配置项 或者 include包含项才进行处理
-                            if("*;".equals(config.getInclude()) || config.getIncludeMap().containsKey(tableName)) {
+                            if(config.suitableTable(tableName)) {
                                 ClassInfo classInfo = DataBaseUtil.parseClassInfo(tableName);
                                 CLASS_INFO_LIST.add(classInfo);
                             }

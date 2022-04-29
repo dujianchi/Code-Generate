@@ -115,8 +115,9 @@ public class DataBaseUtil {
      * 获取所有Tables SQL
      */
     private static String getTables() {
-        return MessageFormat.format("select table_name from information_schema.tables where table_schema=\"{0}\" and table_type=\"{1}\";",
-                GlobleConfig.getGlobleConfig().getDataBase(), "base table");
+        //select table_name,table_type from information_schema.tables where table_schema="learning" and upper(table_type)  = "BASE TABLE";
+        return MessageFormat.format("select table_name from information_schema.tables where table_schema=\"{0}\" and upper(table_type)=\"{1}\";",
+                GlobleConfig.getGlobleConfig().getDataBase(), "base table".toUpperCase());
     }
 
     private static Map<String, String> typeMapping = new HashMap<>();

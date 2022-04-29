@@ -1,7 +1,5 @@
 package com.mysql.util;
 
-import sun.net.www.protocol.file.FileURLConnection;
-
 import java.io.*;
 import java.net.JarURLConnection;
 import java.net.URL;
@@ -140,7 +138,7 @@ public class IOTools {
     public static void loadRecourseFromJarByFolder(String folderPath, String targetFolderPath, Class clazz, String originalPath) throws IOException {
         URL url = clazz.getResource(folderPath);
         URLConnection urlConnection = url.openConnection();
-        if (urlConnection instanceof FileURLConnection) {
+        if ("file".equals(url.getProtocol())) {
             copyFileResources(url, folderPath, targetFolderPath, clazz, originalPath);
         } else if (urlConnection instanceof JarURLConnection) {
             copyJarResources((JarURLConnection) urlConnection, folderPath, targetFolderPath, clazz, originalPath);

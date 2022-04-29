@@ -2,7 +2,8 @@ package com.mysql.bean;
 
 import lombok.Data;
 
-import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * ******************************
@@ -58,7 +59,7 @@ public class ConfigurationInfo {
     /***
      * 需要处理的表名Map
      */
-    private Map<String, String> includeMap;
+    private Set<Pattern> includeMap;
 
     /***
      * 需要处理的自定义Handle名 以 ; 划分
@@ -68,7 +69,7 @@ public class ConfigurationInfo {
     /***
      * 需要处理的自定义Handle名
      */
-    private Map<String, String> customHandleIncludeMap;
+    private Set<Pattern> customHandleIncludeMap;
 
     /**
      * 项目名
@@ -94,4 +95,16 @@ public class ConfigurationInfo {
      * 项目根目录
      */
     private String projectPath;
+
+    public boolean suitableTable(String table) {
+        return suitable(includeMap, table);
+    }
+
+    public boolean suitableHandle(String table) {
+        return suitable(customHandleIncludeMap, table);
+    }
+
+    private static boolean suitable(Set<Pattern> patterns, String name) {
+        return patterns != null && patterns.stream().anyMatch(pattern -> pattern.matcher(name).matches());
+    }
 }

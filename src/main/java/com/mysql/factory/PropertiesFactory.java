@@ -1,9 +1,9 @@
 package com.mysql.factory;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.mysql.bean.ConfigurationInfo;
 import com.mysql.bean.GlobleConfig;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,9 +11,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Properties;
+import java.util.Set;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * ******************************
@@ -77,18 +80,12 @@ public class PropertiesFactory {
     /***
      * 解析需要构造的表Map方法
      */
-    private static Map<String, String> parseInclude(String include) {
-        Map<String, String> result = new HashMap<>();
-        if (StringUtils.isBlank(include)) {
-            return result;
-        }
-
-        String[] strings = include.split(";");
-        for (String key : strings) {
-            result.put(key, key);
-        }
-
-        return result;
+    private static Set<Pattern> parseInclude(String include) {
+        if (StrUtil.isEmpty(include)) return Collections.emptySet();
+        return Arrays.stream(include.split(";")).filter(StrUtil::isNotBlank)
+                .distinct()
+                .map(str -> Pattern.compile(str.replace("*", ".*")))
+                .collect(Collectors.toSet());
     }
 
     private static Logger logger = LoggerFactory.getLogger(PropertiesFactory.class);

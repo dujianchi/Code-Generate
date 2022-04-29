@@ -50,14 +50,14 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.53</version>
+            <version>1.2.79</version>
         </dependency>
 
         <!-- mysql -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.43</version>
+            <version>8.0.28</version>
         </dependency>
 
         <!-- mybatis -->
@@ -71,14 +71,14 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <version>3.12.0</version>
         </dependency>
 
         <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.20</version>
+            <version>1.18.24</version>
         </dependency>
     </dependencies>
 
@@ -94,16 +94,16 @@
     <!-- 启用阿里云镜像下载依赖 -->
     <repositories>
         <repository>
-            <id>nexus-aliyun</id>
-            <name>nexus-aliyun</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <url>https://maven.aliyun.com/repository/public</url>
         </pluginRepository>
     </pluginRepositories>
 </project>

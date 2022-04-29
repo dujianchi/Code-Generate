@@ -7,6 +7,7 @@ import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 /**
@@ -39,14 +40,17 @@ public final class CustomEngineImpl {
         for (Class<? extends CustomEngine> aClass : classes) {
 
             // 基于配置项检测是否需要启用自定义实现类
-            if("*;".equals(GlobleConfig.getGlobleConfig().getCustomHandleInclude()) ||
-                    GlobleConfig.getGlobleConfig().getCustomHandleIncludeMap().containsKey(aClass.getSimpleName())) {
+            if(GlobleConfig.getGlobleConfig().suitableHandle(aClass.getSimpleName())) {
                 try {
                     // 基于反射构建对象 - 调用handle方法
-                    CustomEngine engine = aClass.newInstance();
+                    CustomEngine engine = aClass.getConstructor().newInstance();
                     engine.handle(GlobleConfig.getGlobleConfig(), ClassInfoFactory.getClassInfoList());
                 } catch (InstantiationException | IllegalAccessException e) {
                     e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    throw new RuntimeException(e);
+                } catch (NoSuchMethodException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
