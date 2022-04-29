@@ -4,6 +4,9 @@ import java.io.Serializable;
 import lombok.Data;
 import java.util.Date;
 import java.util.List;
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * ${classInfo.classComment}
@@ -19,6 +22,13 @@ public class ${classInfo.className} implements Serializable {
     /**
      * ${fieldItem.columnName}  ${fieldItem.fieldComment}
      */
+    <#if (fieldItem.fieldClass == 'Date')>
+    @JSONField(name = "${fieldItem.fieldName}", format = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
+    <#else/>
+    @JSONField(name = "${fieldItem.fieldName}")
+    </#if>
+    @JsonProperty(value = "${fieldItem.fieldName}")
     private ${fieldItem.fieldClass} ${fieldItem.fieldName};
 </#list>
 </#if>

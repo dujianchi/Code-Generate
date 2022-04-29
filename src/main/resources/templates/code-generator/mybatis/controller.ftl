@@ -178,14 +178,13 @@ public class ${classInfo.className}Controller {
                             @RequestParam(value = "limit"       , required = false, defaultValue = "15") Integer limit) {
         ${classInfo.className} query = new ${classInfo.className}();
         if (StringUtils.isNotBlank(searchParams)) {
-            JSONObject object = JSON.parseObject(searchParams);
-            query = object.toJavaObject(${classInfo.className}.class);
+            query = JSON.parseObject(searchParams, ${classInfo.className}.class);
         }
 
         PageList<${classInfo.className}> pageList = service.selectPage(query, page, limit);
         JSONObject response = new JSONObject();
-        response.put("code" , 0);
-        response.put("msg"  , "");
+        response.put("code", ResultCode.success.getCode());
+        response.put("msg", ResultCode.success.getDescr());
         response.put("data" , null != pageList.getList() ? pageList.getList() : new JSONArray());
         response.put("count", pageList.getTotalCount());
         return response.toString();
