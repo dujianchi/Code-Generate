@@ -2,9 +2,10 @@ package ${packageName}.entity;
 
 import java.io.Serializable;
 import lombok.Data;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import com.alibaba.fastjson.annotation.JSONField;
+import com.alibaba.fastjson2.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -47,7 +47,7 @@ public final class DefaultEngine extends AbstractEngine {
      */
     private void genClass(ClassInfo classInfo, String templateName,  String parentPackage, String classSuffix) {
         // 构建文件地址
-        String path     = config.getPackageName().replace(".", SPACER);
+        String path = config.getPackageName().replace(".", SPACER);
 
         // Example: F:\code\Demo\src\main\java\com\demo\controller\ScriptDirController.java
         String filePath = config.getProjectPath() + SRC_MAIN_JAVA + path + SPACER

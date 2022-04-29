@@ -1,7 +1,8 @@
 package com.mysql.factory;
 
 import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.mysql.bean.ConfigurationInfo;
 import com.mysql.bean.GlobleConfig;
 import org.slf4j.Logger;
@@ -31,13 +32,13 @@ public class PropertiesFactory {
     /***
      * 配置文件KEYS
      */
-    private static final String[] KEYS = {"ip", "port", "driver", "dataBase", "encoding", "loginName", "passWord"
+    private static final String[] KEYS = {"ip", "port", "driver", "dataBase", "encoding", "loginName", "passWord", "trimClassPrefix"
             , "include", "projectName", "packageName", "authorName", "rootPath", "customHandleInclude"};
 
     /***
      * 配置文件默认Values
      */
-    private static final String[] VALUES = {"127.0.0.1", "3306", "com.mysql.jdbc.Driver", "db_file", "UTF-8", "root", ""
+    private static final String[] VALUES = {"127.0.0.1", "3306", "com.mysql.jdbc.Driver", "db_file", "UTF-8", "root", "", ""
             , "*", "Demo", "com.demo", "Kerwin", "F:\\code", "*"};
 
     /***
@@ -65,7 +66,7 @@ public class PropertiesFactory {
             json.put(KEYS[i], value);
         }
 
-        ConfigurationInfo configurationInfo = json.toJavaObject(ConfigurationInfo.class);
+        ConfigurationInfo configurationInfo = JSON.parseObject(json.toJSONString(), ConfigurationInfo.class);
         configurationInfo.setIncludeMap(parseInclude(configurationInfo.getInclude()));
         configurationInfo.setCustomHandleIncludeMap(parseInclude(configurationInfo.getCustomHandleInclude()));
 

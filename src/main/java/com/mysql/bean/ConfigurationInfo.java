@@ -51,6 +51,11 @@ public class ConfigurationInfo {
      */
     private String passWord;
 
+    /**
+     * 去掉类前缀
+     */
+    private String trimClassPrefix;
+
     /***
      * 需要处理的表名 以 ; 划分
      */

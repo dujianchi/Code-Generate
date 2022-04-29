@@ -44,6 +44,10 @@ public class DataBaseUtil {
 
         // className信息
         String className = StringUtil.upperCaseFirst(StringUtil.underlineToCamelCase(tableName));
+        final String trimClassPrefix = GlobleConfig.getGlobleConfig().getTrimClassPrefix();
+        if (trimClassPrefix != null && trimClassPrefix.trim().length() > 0 && className.startsWith(trimClassPrefix.trim()))
+            className = className.replaceFirst(trimClassPrefix, "");
+
         classInfo.setClassName(className);
         classInfo.setModelName(StringUtil.lowerCaseFirst(className));
         classInfo.setClassComment(className);
@@ -84,7 +88,7 @@ public class DataBaseUtil {
     /***
      * 根据指定库获取所有表名
      */
-    public static List<String> getAllTableNames () throws SQLException {
+    public static List<String> getAllTableNames() throws SQLException {
         // result
         List<String> result = new ArrayList<>();
 
@@ -123,24 +127,24 @@ public class DataBaseUtil {
     private static Map<String, String> typeMapping = new HashMap<>();
 
     static {
-        typeMapping.put("int"       , "Integer");
-        typeMapping.put("char"      , "String");
-        typeMapping.put("varchar"   , "String");
-        typeMapping.put("datetime"  , "Date");
-        typeMapping.put("timestamp" , "Date");
-        typeMapping.put("bit"       , "Integer");
-        typeMapping.put("tinyint"   , "Integer");
-        typeMapping.put("smallint"  , "Integer");
-        typeMapping.put("year"      , "Date");
-        typeMapping.put("date"      , "Date");
-        typeMapping.put("bigint"    , "Long");
-        typeMapping.put("decimal"   , "BigDecimal");
-        typeMapping.put("double"    , "Double");
-        typeMapping.put("float"     , "Float");
-        typeMapping.put("numeric"   , "Integer");
-        typeMapping.put("text"      , "String");
+        typeMapping.put("int", "Integer");
+        typeMapping.put("char", "String");
+        typeMapping.put("varchar", "String");
+        typeMapping.put("datetime", "Date");
+        typeMapping.put("timestamp", "Date");
+        typeMapping.put("bit", "Integer");
+        typeMapping.put("tinyint", "Integer");
+        typeMapping.put("smallint", "Integer");
+        typeMapping.put("year", "Date");
+        typeMapping.put("date", "Date");
+        typeMapping.put("bigint", "Long");
+        typeMapping.put("decimal", "BigDecimal");
+        typeMapping.put("double", "Double");
+        typeMapping.put("float", "Float");
+        typeMapping.put("numeric", "Integer");
+        typeMapping.put("text", "String");
         typeMapping.put("mediumtext", "String");
-        typeMapping.put("longtext"  , "String");
-        typeMapping.put("time"      , "Date");
+        typeMapping.put("longtext", "String");
+        typeMapping.put("time", "Date");
     }
 }

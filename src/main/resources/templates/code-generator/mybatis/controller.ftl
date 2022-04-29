@@ -1,8 +1,8 @@
 package ${packageName}.web;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
 import ${packageName}.entity.*;
 import ${packageName}.common.ApiResult;
 import ${packageName}.common.PageList;
@@ -183,8 +183,8 @@ public class ${classInfo.className}Controller {
 
         PageList<${classInfo.className}> pageList = service.selectPage(query, page, limit);
         JSONObject response = new JSONObject();
-        response.put("code", ResultCode.success.getCode());
-        response.put("msg", ResultCode.success.getDescr());
+        response.put("code", 0);//傻逼吧，这里怎么跟其他接口的code不统一
+        response.put("msg", "");
         response.put("data" , null != pageList.getList() ? pageList.getList() : new JSONArray());
         response.put("count", pageList.getTotalCount());
         return response.toString();

@@ -48,9 +48,9 @@
 
         <!-- fastJson -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.79</version>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.1</version>
         </dependency>
 
         <!-- mysql -->
